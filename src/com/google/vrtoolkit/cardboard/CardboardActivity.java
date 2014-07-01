@@ -195,6 +195,11 @@ implements MagnetSensor.OnCardboardTriggerListener, NfcSensor.OnCardboardNfcList
 
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
+		if (KeyEvent.KEYCODE_VOLUME_UP == keyCode || KeyEvent.KEYCODE_VOLUME_DOWN == keyCode) {
+			mMagnetSensor.fakeTrigger();
+			return true;
+		}
+		
 		if (((keyCode == 24) || (keyCode == 25)) && (areVolumeKeysDisabled()))
 		{
 			return true;
@@ -205,10 +210,6 @@ implements MagnetSensor.OnCardboardTriggerListener, NfcSensor.OnCardboardNfcList
 
 	public boolean onKeyUp(int keyCode, KeyEvent event)
 	{
-		if (event.getAction() == KeyEvent.ACTION_UP && 
-				(KeyEvent.KEYCODE_VOLUME_UP == keyCode || KeyEvent.KEYCODE_VOLUME_UP == keyCode) ){
-			mMagnetSensor.fakeTrigger();
-		}
 		if (((keyCode == 24) || (keyCode == 25)) && (areVolumeKeysDisabled()))
 		{
 			return true;
